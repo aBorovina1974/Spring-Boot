@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Pregled Bilješki</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="logoutHeader :: logout"></div>
+<h1 align="center">Pregled bilješki</h1>
+<div align="center">
+<table class="table table-sm table-striped">
+<tr>
+<th>Naslov</th>
+<th>Text</th>
+<th>Korisnik</th>
+<th>Bilježnica</th>
+</tr>
+<tr th:each="biljeska : ${biljeske}">
+<td th:text="${biljeska.naslov}">Neki naslov</td>
+<td th:text="${biljeska.text}">Neki tekst</td>
+<td th:text="|${biljeska.korisnik.imeKorisnika} ${biljeska.korisnik.prezimeKorisnika}|">Neki korisnik</td>
+<td th:text="${biljeska.biljeznica.naziv}">Neka Biljeznica</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<table>
+<tr>
+<td>
+<a th:href="@{/napraviNovuBiljesku}">
+<button class="btn btn-primary btn-sm">Napravi novu bilješku</button>
+</a>
+</td>
+<td>
+<form th:action="@{/sortiranjeBiljeski}" method="get">
+<button type="submit" name="sort" value="asc" class="btn btn-outline-info btn-sm">
+Sortiraj uzlazno</button>
+<button type="submit" name="sort" value="desc" class="btn btn-outline-info btn-sm">
+Sortiraj silazno</button>
+</form>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

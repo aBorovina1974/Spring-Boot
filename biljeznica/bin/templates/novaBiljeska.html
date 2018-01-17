@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Bilježnica</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="logoutHeader :: logout"></div>
+<h1 align="center">Nova bilješka</h1>
+<div align="center">
+<form th:action="@{/potvrdaSpremanja}" th:object="${novaBiljeskaForm}" method="post">
+<table>
+<tr>
+<td>Korisnik:</td>
+<td>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+<select th:field="*{korisnik}">
+<option th:each="korisnik : ${korisnici}"
+        th:value="${korisnik.korisnikId}"
+        th:text="|${korisnik.imeKorisnika} ${korisnik.prezimeKorisnika}|">Korisnik</option>
+</select>
+</div>
+</td>
+</tr>
+<tr>
+<td>Bilježnica:</td>
+<td>
+<select th:field="*{biljeznica}">
+<option th:each="biljeznica : ${biljeznice}"
+        th:value="${biljeznica.naziv}"
+        th:text="${biljeznica.naziv}">Bilježnica</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Naslov:</td>
+<td>
+<input type="text"  th:field="*{naslovBiljeske}"/>
+</td>
+</tr>
+<tr>
+<td>Text:</td>
+<td>
+<textarea th:field="*{text}" rows="8" cols="40"></textarea>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<input type="submit" value="Spremi bilješku" class="btn btn-primary btn-sm"/>
+</td>
+</tr>
+</table>
+
+<table class="table table-sm table-striped">
+<tr>
+<th>Bilježnica</th>
+<th>Broj unesenih bilješki</th>
+</tr>
+<tr th:each="entry : ${brojac}">
+<td  th:text="${entry.key}">Bilježnica</td>
+<td  th:text="${entry.value}">0</td>
+</tr>
+</table>
+</form>
+<a th:href="@{/obrisiStatistiku}">
+<button class="btn btn-danger btn-sm">Obriši statistiku</button>
+</a>
+<a th:href="@{/pregledBiljeski}">
+<button class="btn btn-primary btn-sm">Pregled svih bilješki</button>
+</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<div align="center" th:fragment="logout">
+<form th:action="@{/logout}" method="post">
+Ulogirani ste kao:<span th:text="${loggedUser}">Neki username</span>
+<input type="submit" value="Odjava" class="btn btn-danger btn-sm"/>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Bilješka</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" >
+</head>
+<body>
+<div th:replace="logoutHeader :: logout"></div>
+<div align="center">
+<h1 th:text="${biljeska.naslov}">Naslov bilješke</h1>
+<p th:text="${biljeska.text}">Tekst bilješke</p>
+
+<p th:text="|Napisao: ${biljeska.korisnik.imeKorisnika} ${biljeska.korisnik.prezimeKorisnika}, 
+             korisničko ime: ${biljeska.korisnik.korisnickoIme}|">
+             Napisao:Ime i prezime korisnika , korisničko ime: korisničko ime </p>
+ 
+<p th:text="|Nalazite se u bilježnici: ${biljeska.biljeznica.naziv}|">
+             Nalazite se u bilježnici: Naziv bilježnice </p>
+<a th:href="@{/napraviNovuBiljesku}">
+<button class="btn btn-primary btn-sm">Napravi novu bilješku</button>
+</a>
+</div>
+</body>
+</html>
